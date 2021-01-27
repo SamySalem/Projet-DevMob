@@ -1,0 +1,7 @@
+<form [formGroup]="listForm" (ngSubmit)="save()">
+  <ion-item>
+    <ion-label>List name</ion-label>
+    <ion-input formControlName="name"></ion-input>
+  </ion-item>
+  <ion-button [disabled]="!listForm.valid" type="submit" expand="block">Create list</ion-button>
+</form>>
