@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "todolist-6830a": {
+      "hosting": {
+        "app": [
+          "todolist-6830a"
+        ]
+      }
+    }
+  }
+}
