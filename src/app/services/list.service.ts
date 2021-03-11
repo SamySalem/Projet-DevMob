@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { List } from '../models/list';
 import { Todo } from '../models/todo';
 
@@ -7,13 +10,25 @@ import { Todo } from '../models/todo';
 })
 export class ListService {
   private lists: List[];
+  private listsQuery: any;
 
-  constructor() { 
+  constructor(private af:AngularFirestore) { 
     this.lists = [];
+    this.listsQuery = this.af.collection("lists");
   }
 
-  getAll(){
-    return this.lists;
+  getAll(): Observable<List[]>{
+    return this.listsQuery.snapshotChanges().pipe(
+      map(actions => this.convertSnapshotData<List>(actions))
+    );
+  }
+
+  private convertSnapshotData<Type>(actions) {
+    return actions.map(action => {
+      const data = action.payload.doc.data();
+      const id = action.payload.doc.id;
+      return {id, ...data} as Type;
+    });
   }
 
   getOne(id: string){

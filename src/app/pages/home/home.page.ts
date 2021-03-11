@@ -17,7 +17,7 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit(){
-    this.lists = this.listService.getAll();
+    this.listService.getAll().subscribe(res => this.lists = res);
   }
 
   async openCreateModal(){
