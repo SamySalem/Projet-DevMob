@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { List } from '../models/list';
 import { Todo } from '../models/todo';
 
@@ -10,11 +10,11 @@ import { Todo } from '../models/todo';
 })
 export class ListService {
   private lists: List[];
-  private listsQuery: any;
+  private listsQuery: AngularFirestoreCollection<List>;
 
   constructor(private af:AngularFirestore) { 
     this.lists = [];
-    this.listsQuery = this.af.collection("lists");
+    this.listsQuery = this.af.collection('lists');
   }
 
   getAll(): Observable<List[]>{
@@ -31,8 +31,17 @@ export class ListService {
     });
   }
 
-  getOne(id: string){
-    return this.lists.find(l => l.id = id);
+  getOne(id: string): Observable<List>{
+    return this.listsQuery?.doc<List>(id).valueChanges().pipe(
+      switchMap(list =>
+        this.listsQuery.doc(id).collection<Todo>('todos').snapshotChanges().pipe(
+          map(actions => {
+            list.todos = this.convertSnapshotData<Todo>(actions);
+            return list;
+          })
+        )
+      )
+    );
   }
 
   create(list: List){
@@ -40,7 +49,7 @@ export class ListService {
   }
 
   addTodo(todo: Todo, listId: string){
-    this.getOne(listId).todos.push(todo);
+    //this.getOne(listId).todos.push(todo);
   }
 
   delete(list){
@@ -49,6 +58,6 @@ export class ListService {
 
   deleteTodo(todo: Todo, listId: string){
     const list = this.getOne(listId);
-list.todos.splice(list.todos.indexOf(todo), 1);
+    //list.todos.splice(list.todos.indexOf(todo), 1);
   }
 }

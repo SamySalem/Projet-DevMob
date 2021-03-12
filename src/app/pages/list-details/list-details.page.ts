@@ -16,8 +16,8 @@ export class ListDetailsPage implements OnInit {
   constructor(private listService: ListService, private modalController: ModalController, private route: ActivatedRoute) { }
 
   ngOnInit() {
-  const listId = this.route.snapshot.paramMap.get('listId')
-   this.list = this.listService.getOne(listId)
+    const listId = this.route.snapshot.paramMap.get('listId')
+    this.listService.getOne(listId).subscribe(res => this.list = res);
   }
 
   async openCreateModal(){
