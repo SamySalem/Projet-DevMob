@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-this.auth.getConnectedUser().subscribe(user => this.user = user)
+  this.auth.getConnectedUser().subscribe(user => this.user = user)
 
     this.route.subscribe(route => {
 
@@ -41,10 +41,11 @@ this.auth.getConnectedUser().subscribe(user => this.user = user)
         case 'mdp-retrieve':
           this.title = 'Password Recovery'
           break;
-          case 'list-details':
-            const list = this.listService.getOne(url.split('/')[2])
-            this.title = list && list.name;
-            break;
+        case 'list-details':
+          var list;
+          this.listService.getOne(url.split('/')[2]).subscribe(res => list = res);
+          this.title = list && list.name;
+          break;
         default:
           console.log(`Unknown url ${url}.`);
       }
