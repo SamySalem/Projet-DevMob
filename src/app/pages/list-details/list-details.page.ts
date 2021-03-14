@@ -12,26 +12,27 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ListDetailsPage implements OnInit {
   private list: List;
+  private listId: string;
 
   constructor(private listService: ListService, private modalController: ModalController, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const listId = this.route.snapshot.paramMap.get('listId')
-    this.listService.getOne(listId).subscribe(res => this.list = res);
+    this.listId = this.route.snapshot.paramMap.get('listId')
+    this.listService.getOne(this.listId).subscribe(res => this.list = res);
   }
 
   async openCreateModal(){
     const modal = await this.modalController.create({
       component: CreateTodoComponent,
       componentProps: {
-        'listId': this.list.id
+        'listId': this.listId
       }
     });
     return await modal.present();
   }
 
   delete(todo){
-    this.listService.deleteTodo(todo, this.list.id);
+    this.listService.deleteTodo(todo, this.listId);
   }
 
 }

@@ -42,9 +42,9 @@ export class HeaderComponent implements OnInit {
           this.title = 'Password Recovery'
           break;
         case 'list-details':
-          var list;
-          this.listService.getOne(url.split('/')[2]).subscribe(res => list = res);
-          this.title = list && list.name;
+          this.listService.getOne(url.split('/')[2]).subscribe(list => {
+            this.title = list && list.name;
+          });
           break;
         default:
           console.log(`Unknown url ${url}.`);

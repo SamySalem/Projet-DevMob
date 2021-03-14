@@ -27,7 +27,7 @@ export class HomePage implements OnInit {
     return await modal.present();
   }
 
-  delete(list: List){
-    this.listService.delete(list);
+  delete(listId: String){
+    this.listService.delete(listId);
   }
 }

@@ -14,7 +14,7 @@ export class ListService {
 
   constructor(private af:AngularFirestore) { 
     this.lists = [];
-    this.listsQuery = this.af.collection('lists');
+    this.listsQuery = this.af.collection('lists',where ("owner", ));
   }
 
   getAll(): Observable<List[]>{
@@ -44,20 +44,33 @@ export class ListService {
     );
   }
 
-  create(list: List){
-    this.lists.push(list);
+  async create(list: List){
+    await this.listsQuery.add({
+      name: list.name,
+      todos: list.todos,
+    });
   }
 
-  addTodo(todo: Todo, listId: string){
-    //this.getOne(listId).todos.push(todo);
+  async addTodo(todo: Todo, listId: string){
+    await this.listsQuery.doc<List>(listId).collection("todos").add({
+      name: todo.name,
+      description: todo.description,
+    });
   }
 
-  delete(list){
-    this.lists.splice(this.lists.indexOf(list), 1);
+  delete(listId){
+    this.listsQuery.doc(listId).delete().then(() => {
+      console.log("Document successfully deleted!");
+  }).catch((error) => {
+      console.error("Error removing document: ", error);
+  });
   }
 
   deleteTodo(todo: Todo, listId: string){
-    const list = this.getOne(listId);
-    //list.todos.splice(list.todos.indexOf(todo), 1);
+    this.listsQuery.doc<List>(listId).collection("todos").doc<Todo>(todo.id).delete().then(() => {
+      console.log("Document successfully deleted!");
+  }).catch((error) => {
+      console.error("Error removing document: ", error);
+  });
   }
 }
