@@ -14,7 +14,7 @@ export class ListService {
 
   constructor(private af:AngularFirestore) { 
     this.lists = [];
-    this.listsQuery = this.af.collection('lists',where ("owner", ));
+    this.listsQuery = this.af.collection('lists');
   }
 
   getAll(): Observable<List[]>{
