@@ -20,9 +20,11 @@
                 </ion-item-options>
             </ion-item-sliding>
         </ion-list>
-        <ion-button class="bottom-btn" expand="block" fill="outline" (click)="openCreateModal()">Add a new list
+        <ion-button class="bottom-btn" expand="block" fill="outline" (click)="openCreateModal()">
+            <ion-icon name="add-circle-outline" slot="end"></ion-icon>
+            Add a new list
         </ion-button>
-
+        <!--
         <ion-tabs>
             <ion-tab-bar>
                 <ion-header translucent>
@@ -44,6 +46,6 @@
                 </ion-header>
             </ion-tab-bar>
         </ion-tabs>
-
+      -->
     </div>
 </ion-content>
