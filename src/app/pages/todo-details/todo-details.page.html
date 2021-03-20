@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>todo-details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-input>{{ todo?.name }}</ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea rows="20" cols="20" *ngIf="todo" [(ngModel)] = "todo.description"></ion-textarea>
+    </ion-item>
+  </ion-list>
+  <ion-button color="primary" (click)="update(todo, listId)">Primary</ion-button>
+</ion-content>
