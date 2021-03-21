@@ -8,4 +8,7 @@ constructor(name){
 
     name: string;
     todos: Todo[];
+    owner: string;
+    canRead: string[];
+    canWrite: string[];
 }

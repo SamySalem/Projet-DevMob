@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>sharedWithMe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="container">
+    <ion-list>
+      <!-- Sliding item with text options on both sides -->
+      <ion-item-sliding *ngFor="let list of sharedRead">
+        <ion-item [routerLink]="['/list-details/' + list.id ]" routerLinkActive="active">
+          <ion-label>{{ list.name }}</ion-label>
+          <ion-badge color="default">Read only</ion-badge>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+    <ion-list>
+      <!-- Sliding item with text options on both sides -->
+      <ion-item-sliding *ngFor="let list of sharedWrite">
+        <ion-item [routerLink]="['/list-details/' + list.id ]" routerLinkActive="active">
+          <ion-label>{{ list.name }}</ion-label>
+          <ion-badge color="success">All</ion-badge>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+</ion-content>

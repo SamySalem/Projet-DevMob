@@ -29,6 +29,14 @@ const routes: Routes = [
   {
     path: 'lists/:listId/todo-details/:todoId',
     loadChildren: () => import('./pages/todo-details/todo-details.module').then( m => m.TodoDetailsPageModule)
+  },
+  {
+    path: 'mylists',
+    loadChildren: () => import('./pages/mylists/mylists.module').then( m => m.MylistsPageModule)
+  },
+  {
+    path: 'shared-with-me',
+    loadChildren: () => import('./pages/shared-with-me/shared-with-me.module').then( m => m.SharedWithMePageModule)
   }
 ];
 

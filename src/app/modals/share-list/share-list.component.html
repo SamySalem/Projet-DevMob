@@ -1,0 +1,19 @@
+<ion-content>
+  <form [formGroup]="shareForm" novalidate>
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input type="text" formControlName="email" required></ion-input>
+    </ion-item>
+    <ion-radio-group>  
+      <ion-item>
+        <ion-label>Read only</ion-label>
+        <ion-radio slot="start" type="radio" value="readOnly" formControlName="shareType"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>All</ion-label>
+        <ion-radio slot="start" type="radio" value="all" formControlName="shareType"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    <ion-button (click)="share()">Share</ion-button>
+  </form>
+</ion-content>

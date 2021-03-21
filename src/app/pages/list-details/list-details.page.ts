@@ -4,6 +4,7 @@ import { CreateTodoComponent } from 'src/app/modals/create-todo/create-todo.comp
 import { ListService } from 'src/app/services/list.service';
 import { List } from 'src/app/models/list';
 import { ActivatedRoute } from '@angular/router';
+import { ShareListComponent } from 'src/app/modals/share-list/share-list.component';
 
 @Component({
   selector: 'app-list-details',
@@ -24,6 +25,16 @@ export class ListDetailsPage implements OnInit {
   async openCreateModal(){
     const modal = await this.modalController.create({
       component: CreateTodoComponent,
+      componentProps: {
+        'listId': this.listId
+      }
+    });
+    return await modal.present();
+  }
+
+  async openShareModal(){
+    const modal = await this.modalController.create({
+      component: ShareListComponent,
       componentProps: {
         'listId': this.listId
       }

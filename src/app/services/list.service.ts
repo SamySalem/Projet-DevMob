@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { List } from '../models/list';
@@ -9,16 +10,52 @@ import { Todo } from '../models/todo';
   providedIn: 'root'
 })
 export class ListService {
+
   private lists: List[];
   private listsQuery: AngularFirestoreCollection<List>;
+  private myLists: AngularFirestoreCollection<List>;
+  private sharedRead: AngularFirestoreCollection<List>;
+  private sharedWrite: AngularFirestoreCollection<List>;
+  private user;
 
   constructor(private af:AngularFirestore) { 
-    this.lists = [];
-    this.listsQuery = this.af.collection('lists');
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.user = firebase.auth().currentUser;
+        this.lists = [];
+        this.listsQuery = this.af.collection('lists');
+        this.myLists = this.af.collection('lists', req => req.where('owner', '==', this.user?.email));
+        this.sharedRead = this.af.collection('lists', req => req.where('canRead', 'array-contains', this.user?.email));
+        this.sharedWrite = this.af.collection('lists', req => req.where('canWrite', 'array-contains', this.user?.email));
+      }
+      else {
+        // User is signed out.
+      }
+    })
+    
   }
 
-  getAll(): Observable<List[]>{
-    return this.listsQuery.snapshotChanges().pipe(
+  getAll(listType): Observable<List[]>{
+    let currentList; 
+    switch(listType) { 
+      case 0: { 
+        currentList = this.listsQuery;
+         break; 
+      } 
+      case 1: { 
+        currentList = this.myLists;
+         break; 
+      }
+      case 2: { 
+        currentList = this.sharedRead;
+         break; 
+      }
+      case 3: { 
+        currentList = this.sharedWrite;
+         break; 
+      }
+   } 
+    return currentList.snapshotChanges().pipe(
       map(actions => this.convertSnapshotData<List>(actions))
     );
   }
@@ -48,6 +85,9 @@ export class ListService {
     await this.listsQuery.add({
       name: list.name,
       todos: list.todos,
+      owner: this.user.email,
+      canRead: [],
+      canWrite: [],
     });
   }
 
@@ -73,4 +113,21 @@ export class ListService {
       console.error("Error removing document: ", error);
   });
   }
+
+  async shareList(listId: string, arg1: boolean, email: string) {
+    const listRef = this.af.collection('lists').doc(listId);
+    console.log(email);
+    if(arg1){
+      await listRef.update({
+        canRead: firebase.firestore.FieldValue.arrayRemove(email),
+        canWrite: firebase.firestore.FieldValue.arrayUnion(email),
+      });
+    } else {
+      await listRef.update({
+        canWrite: firebase.firestore.FieldValue.arrayRemove(email),
+        canRead: firebase.firestore.FieldValue.arrayUnion(email),
+      });
+    }
+  }
+
 }
