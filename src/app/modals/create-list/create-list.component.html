@@ -13,12 +13,12 @@
       <ion-input type="text" name="name" formControlName="name" required></ion-input>
     </ion-item>
     <div class="ion-text-center">
-      <ion-text *ngIf="errorControl.name.touched && errorControl.name.errors?.required">
+      <ion-text color="danger" *ngIf="errorControl.name.touched && errorControl.name.errors?.required">
         <span>
           This field is required
         </span>
       </ion-text>
-      <ion-text *ngIf="errorControl.name.touched && errorControl.name.errors?.minlength">
+      <ion-text color="danger" *ngIf="errorControl.name.touched && errorControl.name.errors?.minlength">
         <span>
           Minimum length 2
         </span>
