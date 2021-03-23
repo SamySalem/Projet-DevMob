@@ -6,9 +6,6 @@ import { Router } from '@angular/router';
 import 'firebase/auth';
 import { AuthService } from 'src/app/services/auth.service';
 import * as firebase from 'firebase';
-import "@codetrix-studio/capacitor-google-auth";
-import { Plugins } from '@capacitor/core';
-
 
 @Component({
   selector: 'todo-list-app-login',
