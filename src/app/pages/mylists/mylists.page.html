@@ -1,11 +1,13 @@
 <ion-content>
     <ion-list-header class="ion-margin-top">My lists</ion-list-header>
-    <div id="container">
-        <ion-list>
+    <ion-list>
+        <ion-reorder-group disabled="false">
             <!-- Sliding item with text options on both sides -->
             <ion-item-sliding *ngFor="let list of lists">
                 <ion-item [routerLink]="['/list-details/' + list.id ]" routerLinkActive="active">
                     <ion-label>{{ list.name }}</ion-label>
+                    
+            <ion-reorder slot="end"></ion-reorder>
                 </ion-item>
 
                 <ion-item-options side="end">
@@ -14,28 +16,11 @@
                     </ion-item-option>
                 </ion-item-options>
             </ion-item-sliding>
-        </ion-list>
-        <ion-button class="bottom-btn ion-margin-horizontal" expand="block" shape="round" fill="outline" (click)="openCreateModal()">
-            <ion-icon name="add-circle-outline" slot="start"></ion-icon>
-            Add a new list
-        </ion-button>
-    </div>
-
-    <ion-reorder-group>
-        <ion-reorder>
-            <ion-item>
-                <ion-label>
-                    Item 7
-                </ion-label>
-            </ion-item>
-        </ion-reorder>
-
-        <ion-reorder>
-            <ion-item>
-                <ion-label>
-                    Item 8
-                </ion-label>
-            </ion-item>
-        </ion-reorder>
-    </ion-reorder-group>
+        </ion-reorder-group>
+    </ion-list>
+    <ion-button class="bottom-btn ion-margin-horizontal" expand="block" shape="round" fill="outline"
+        (click)="openCreateModal()">
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        Add a new list
+    </ion-button>
 </ion-content>
