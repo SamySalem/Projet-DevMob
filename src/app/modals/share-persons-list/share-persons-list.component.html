@@ -8,26 +8,26 @@
 </ion-header>
 <ion-content>
   <ion-list>
-    <ion-item-sliding>
+    <ion-item-sliding *ngFor="let readEmail of list?.canRead">
       <ion-item routerLinkActive="active">
-        <ion-label>Pokémon Yellow</ion-label>
+        <ion-label>{{readEmail}}</ion-label>
         <ion-badge color="primary">Read only</ion-badge>
       </ion-item>
 
       <ion-item-options side="end">
-        <ion-item-option color="danger">
+        <ion-item-option (click)="deleteFromRead(readEmail)" color="danger">
           <ion-icon slot="icon-only" name="trash"></ion-icon>
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
-    <ion-item-sliding>
+    <ion-item-sliding *ngFor="let writeEmail of list?.canWrite">
       <ion-item routerLinkActive="active">
-        <ion-label>The Legend of Zelda</ion-label>
+        <ion-label>{{writeList}}</ion-label>
         <ion-badge color="success">All</ion-badge>
       </ion-item>
 
       <ion-item-options side="end">
-        <ion-item-option color="danger">
+        <ion-item-option (click)="deleteFromWrite(writeEmail)" color="danger">
           <ion-icon slot="icon-only" name="trash"></ion-icon>
         </ion-item-option>
       </ion-item-options>

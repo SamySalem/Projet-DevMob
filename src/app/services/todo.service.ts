@@ -22,11 +22,9 @@ export class TodoService {
   }
 
   update(todo: Todo, listId: string) {
-    this.listsQuery.doc<List>(listId).collection('todos').doc<Todo>(todo.id).set({
+    this.listsQuery.doc(listId).collection('todos').doc(todo.id).update({
       name: todo.name,
       description: todo.description,
-      isDone: todo.isDone,
-      id: todo.id
     })
     .then(() => {
       console.log("Document successfully written!");

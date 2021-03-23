@@ -14,7 +14,10 @@ export class SharedWithMePage implements OnInit {
 
   ngOnInit() {
     this.listService.getAll(2).subscribe(res => this.sharedRead = res);
-    this.listService.getAll(3).subscribe(res => this.sharedWrite = res);
+    this.listService.getAll(3).subscribe(res => {
+      this.sharedWrite = res;
+      console.log(this.sharedWrite[0])
+    })
   }
 
 }

@@ -47,7 +47,7 @@ export class ListDetailsPage implements OnInit {
     const modal = await this.modalController.create({
       component: SharePersonsListComponent,
       componentProps: {
-        'listId': this.listId
+        'listId': this.listId,
       }
     });
     return await modal.present();

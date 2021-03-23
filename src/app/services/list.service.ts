@@ -129,4 +129,17 @@ export class ListService {
     }
   }
 
+  async deleteFromRead(listId: string, email: string) {
+    const listRef = this.af.collection('lists').doc(listId);
+    await listRef.update({
+      canRead: firebase.firestore.FieldValue.arrayRemove(email),
+    });
+  }
+
+  async deleteFromWrite(listId: string, email: string) {
+    const listRef = this.af.collection('lists').doc(listId);
+    await listRef.update({
+      canWrite: firebase.firestore.FieldValue.arrayRemove(email),
+    });
+  }
 }

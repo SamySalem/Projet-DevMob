@@ -3,7 +3,7 @@
   <ion-list>
     <ion-item>
       <ion-label position="floating">Name</ion-label>
-      <ion-input>{{ todo?.name }}</ion-input>
+      <ion-input *ngIf="todo" [(ngModel)] = "todo.name"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Description</ion-label>
