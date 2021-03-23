@@ -1,10 +1,5 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>sharedWithMe</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <ion-list-header class="ion-margin-top">Shared with me</ion-list-header>
   <div id="container">
     <ion-list>
       <!-- Sliding item with text options on both sides -->
@@ -24,5 +19,8 @@
         </ion-item>
       </ion-item-sliding>
     </ion-list>
+    <div *ngIf="sharedRead.length <= 0 && sharedWrite <= 0" class="ion-text-center">
+      There are no lists shared with you currently!
+    </div>
   </div>
 </ion-content>

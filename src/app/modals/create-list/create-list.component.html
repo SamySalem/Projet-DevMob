@@ -1,6 +1,6 @@
 <ion-header translucent>
   <ion-toolbar>
-    <ion-title>Modal Content</ion-title>
+    <ion-title>Create a new list</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismissModal()">Close</ion-button>
     </ion-buttons>
@@ -12,19 +12,21 @@
       <ion-label position="floating">Name</ion-label>
       <ion-input type="text" name="name" formControlName="name" required></ion-input>
     </ion-item>
-    <ion-text color="danger" *ngIf="errorControl.name.touched && errorControl.name.errors?.required">
-      <span>
-        This field is required
-      </span>
-    </ion-text>
-    <ion-text color="danger" *ngIf="errorControl.name.touched && errorControl.name.errors?.minlength">
-      <span>
-        Minimum length 2
-      </span>
-    </ion-text>
+    <div class="ion-text-center">
+      <ion-text *ngIf="errorControl.name.touched && errorControl.name.errors?.required">
+        <span>
+          This field is required
+        </span>
+      </ion-text>
+      <ion-text *ngIf="errorControl.name.touched && errorControl.name.errors?.minlength">
+        <span>
+          Minimum length 2
+        </span>
+      </ion-text>
+    </div>
     <ion-row>
       <ion-col>
-        <ion-button [disabled]="newListForm.invalid" type="submit" color="primary" expand="block">Submit</ion-button>
+        <ion-button [disabled]="newListForm.invalid" type="submit" color="light" shape="round" expand="block" class="ion-margin-horizontal">Submit</ion-button>
       </ion-col>
     </ion-row>
   </form>

@@ -20,7 +20,7 @@ export class ShareListComponent implements OnInit {
 
   ngOnInit() {
     this.shareForm = this.formBuilder.group({
-      email: new FormControl (this.email),
+      email: new FormControl (this.email, [Validators.required, Validators.email]),
       write: new FormControl (this.write),
    })
   }

@@ -1,9 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{title}}</ion-title>
+    <ion-title routerLink="['/home']" routerLinkActive="active">
+      <ion-icon name="checkmark-done-circle-outline" class="icon"></ion-icon> DOit
+    </ion-title>
     <ion-buttons slot="end">
       <ion-button color="secondary" (click)="loginOrOut()">
-        <ion-icon slot="icon-only" [name]="user ? 'person-remove-outline' : 'person-outline'"></ion-icon>
+        <ion-icon class="login" slot="icon-only" [name]="user ? 'log-in-outline' : ''" color="dark"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

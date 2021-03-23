@@ -37,6 +37,10 @@ const routes: Routes = [
   {
     path: 'shared-with-me',
     loadChildren: () => import('./pages/shared-with-me/shared-with-me.module').then( m => m.SharedWithMePageModule)
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./pages/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   }
 ];
 

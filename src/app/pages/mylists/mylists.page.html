@@ -1,10 +1,5 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>mylists</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <ion-list-header class="ion-margin-top">My lists</ion-list-header>
   <div id="container">
     <ion-list>
       <!-- Sliding item with text options on both sides -->
@@ -20,9 +15,27 @@
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
-    <ion-button class="bottom-btn" expand="block" fill="outline" (click)="openCreateModal()">
+    <ion-button class="bottom-btn ion-margin-horizontal" expand="block" shape="round" fill="outline" (click)="openCreateModal()">
       <ion-icon name="add-circle-outline" slot="end"></ion-icon>
       Add a new list
     </ion-button>
   </div>
+  
+  <ion-reorder-group disabled="false">
+    <ion-reorder>
+      <ion-item>
+        <ion-label>
+          Item 7
+        </ion-label>
+      </ion-item>
+    </ion-reorder>
+  
+    <ion-reorder>
+      <ion-item>
+        <ion-label>
+          Item 8
+        </ion-label>
+      </ion-item>
+    </ion-reorder>
+  </ion-reorder-group>
 </ion-content>

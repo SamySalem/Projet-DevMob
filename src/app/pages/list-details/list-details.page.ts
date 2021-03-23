@@ -5,6 +5,7 @@ import { ListService } from 'src/app/services/list.service';
 import { List } from 'src/app/models/list';
 import { ActivatedRoute } from '@angular/router';
 import { ShareListComponent } from 'src/app/modals/share-list/share-list.component';
+import { SharePersonsListComponent } from 'src/app/modals/share-persons-list/share-persons-list.component';
 
 @Component({
   selector: 'app-list-details',
@@ -35,6 +36,16 @@ export class ListDetailsPage implements OnInit {
   async openShareModal(){
     const modal = await this.modalController.create({
       component: ShareListComponent,
+      componentProps: {
+        'listId': this.listId
+      }
+    });
+    return await modal.present();
+  }
+
+  async openUsersModal(){
+    const modal = await this.modalController.create({
+      component: SharePersonsListComponent,
       componentProps: {
         'listId': this.listId
       }

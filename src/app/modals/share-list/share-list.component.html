@@ -1,13 +1,21 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Share with</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
   <form [formGroup]="shareForm">
     <ion-item>
-      <ion-label>Email</ion-label>
+      <ion-label position="floating">Email</ion-label>
       <ion-input type="email" formControlName="email" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Autoriser à modifier</ion-label>
+      <ion-label>Allow to edit</ion-label>
       <ion-checkbox slot="start" value="all"  formControlName="write"></ion-checkbox>
     </ion-item>
-    <ion-button [disabled]="shareForm.invalid" (click)="share()">Share</ion-button>
+    <ion-button [disabled]="shareForm.invalid" type="submit" color="light" shape="round" expand="block" class="ion-margin-horizontal" (click)="share()">Share</ion-button>
   </form>
 </ion-content>

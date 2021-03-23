@@ -1,0 +1,18 @@
+@font-face {   
+    font-family: 'Righteous';
+    src: url('../../../../assets/fonts/Righteous-Regular.ttf');
+}
+
+ion-title{
+    font-family: Righteous !important;
+    font-size: 24px;
+}
+.icon{
+    font-size: 130%;
+    position: relative;
+    top: 6px;
+    left: 6px;
+}
+.login{
+    font-size: 26px;
+}
