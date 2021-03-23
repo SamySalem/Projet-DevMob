@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { CreateTodoComponent } from './create-todo.component';
@@ -7,7 +7,7 @@ describe('CreateTodoComponent', () => {
   let component: CreateTodoComponent;
   let fixture: ComponentFixture<CreateTodoComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CreateTodoComponent ],
       imports: [IonicModule.forRoot()]
