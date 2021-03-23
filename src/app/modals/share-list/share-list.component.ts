@@ -10,7 +10,7 @@ import { ListService } from 'src/app/services/list.service';
 })
 export class ShareListComponent implements OnInit {
   private email;
-  private shareType;
+  private write;
 
   @Input() listId: string;
   shareForm: FormGroup;
@@ -20,19 +20,20 @@ export class ShareListComponent implements OnInit {
 
   ngOnInit() {
     this.shareForm = this.formBuilder.group({
-      email: new FormControl (this.email, [Validators.required, Validators.minLength(2)]),
-      shareType: new FormControl (this.shareType, Validators.required)
+      email: new FormControl (this.email),
+      write: new FormControl (this.write),
    })
   }
 
   share(){
     console.log(this.shareForm.value)
     const email = this.shareForm.value.email;
-    const shareType = this.shareForm.value.shareType;
-    if (shareType === "readOnly"){
-      this.listService.shareList(this.listId, false, email);
-    } else {
+    const write = this.shareForm.value.write;
+    console.log(write)
+    if (write){
       this.listService.shareList(this.listId, true, email);
+    } else {
+      this.listService.shareList(this.listId, false, email);
     }
     this.dismissModal();
   }
@@ -43,6 +44,6 @@ export class ShareListComponent implements OnInit {
 
   dismissModal() {
     this.modalController.dismiss(); 
-}
+  }
 
 }

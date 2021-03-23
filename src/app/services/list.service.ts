@@ -116,7 +116,6 @@ export class ListService {
 
   async shareList(listId: string, arg1: boolean, email: string) {
     const listRef = this.af.collection('lists').doc(listId);
-    console.log(email);
     if(arg1){
       await listRef.update({
         canRead: firebase.firestore.FieldValue.arrayRemove(email),

@@ -1,0 +1,150 @@
+warning: LF will be replaced by CRLF in src/app/modals/share-list/share-list.component.html.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/app/modals/share-list/share-list.component.ts.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/app/pages/list-details/list-details.module.ts.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/app/pages/shared-with-me/shared-with-me.page.html.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/app/pages/todo-details/todo-details.page.html.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/app/services/list.service.ts.
+The file will have its original line endings in your working directory
+[1mdiff --git a/src/app/modals/share-list/share-list.component.html b/src/app/modals/share-list/share-list.component.html[m
+[1mindex 859259d..07cf215 100644[m
+[1m--- a/src/app/modals/share-list/share-list.component.html[m
+[1m+++ b/src/app/modals/share-list/share-list.component.html[m
+[36m@@ -1,19 +1,13 @@[m
+ <ion-content>[m
+[31m-  <form [formGroup]="shareForm" novalidate>[m
+[32m+[m[32m  <form [formGroup]="shareForm">[m
+     <ion-item>[m
+       <ion-label>Email</ion-label>[m
+[31m-      <ion-input type="text" formControlName="email" required></ion-input>[m
+[32m+[m[32m      <ion-input type="email" formControlName="email" required></ion-input>[m
+     </ion-item>[m
+[31m-    <ion-radio-group>  [m
+[31m-      <ion-item>[m
+[31m-        <ion-label>Read only</ion-label>[m
+[31m-        <ion-radio slot="start" type="radio" value="readOnly" formControlName="shareType"></ion-radio>[m
+[31m-      </ion-item>[m
+[31m-      <ion-item>[m
+[31m-        <ion-label>All</ion-label>[m
+[31m-        <ion-radio slot="start" type="radio" value="all" formControlName="shareType"></ion-radio>[m
+[31m-      </ion-item>[m
+[31m-    </ion-radio-group>[m
+[31m-    <ion-button (click)="share()">Share</ion-button>[m
+[32m+[m[32m    <ion-item>[m
+[32m+[m[32m      <ion-label>Autoriser à modifier</ion-label>[m
+[32m+[m[32m      <ion-checkbox slot="start" value="all"  formControlName="write"></ion-checkbox>[m
+[32m+[m[32m    </ion-item>[m
+[32m+[m[32m    <ion-button [disabled]="shareForm.invalid" (click)="share()">Share</ion-button>[m
+   </form>[m
+ </ion-content>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/modals/share-list/share-list.component.ts b/src/app/modals/share-list/share-list.component.ts[m
+[1mindex e53130c..d47718c 100644[m
+[1m--- a/src/app/modals/share-list/share-list.component.ts[m
+[1m+++ b/src/app/modals/share-list/share-list.component.ts[m
+[36m@@ -10,7 +10,7 @@[m [mimport { ListService } from 'src/app/services/list.service';[m
+ })[m
+ export class ShareListComponent implements OnInit {[m
+   private email;[m
+[31m-  private shareType;[m
+[32m+[m[32m  private write;[m
+ [m
+   @Input() listId: string;[m
+   shareForm: FormGroup;[m
+[36m@@ -20,19 +20,20 @@[m [mexport class ShareListComponent implements OnInit {[m
+ [m
+   ngOnInit() {[m
+     this.shareForm = this.formBuilder.group({[m
+[31m-      email: new FormControl (this.email, [Validators.required, Validators.minLength(2)]),[m
+[31m-      shareType: new FormControl (this.shareType, Validators.required)[m
+[32m+[m[32m      email: new FormControl (this.email),[m
+[32m+[m[32m      write: new FormControl (this.write),[m
+    })[m
+   }[m
+ [m
+   share(){[m
+     console.log(this.shareForm.value)[m
+     const email = this.shareForm.value.email;[m
+[31m-    const shareType = this.shareForm.value.shareType;[m
+[31m-    if (shareType === "readOnly"){[m
+[31m-      this.listService.shareList(this.listId, false, email);[m
+[31m-    } else {[m
+[32m+[m[32m    const write = this.shareForm.value.write;[m
+[32m+[m[32m    console.log(write)[m
+[32m+[m[32m    if (write){[m
+       this.listService.shareList(this.listId, true, email);[m
+[32m+[m[32m    } else {[m
+[32m+[m[32m      this.listService.shareList(this.listId, false, email);[m
+     }[m
+     this.dismissModal();[m
+   }[m
+[36m@@ -43,6 +44,6 @@[m [mexport class ShareListComponent implements OnInit {[m
+ [m
+   dismissModal() {[m
+     this.modalController.dismiss(); [m
+[31m-}[m
+[32m+[m[32m  }[m
+ [m
+ }[m
+[1mdiff --git a/src/app/pages/list-details/list-details.module.ts b/src/app/pages/list-details/list-details.module.ts[m
+[1mindex 00801c4..c882b54 100644[m
+[1m--- a/src/app/pages/list-details/list-details.module.ts[m
+[1m+++ b/src/app/pages/list-details/list-details.module.ts[m
+[36m@@ -8,6 +8,7 @@[m [mimport { ListDetailsPageRoutingModule } from './list-details-routing.module';[m
+ [m
+ import { ListDetailsPage } from './list-details.page';[m
+ import { CreateTodoComponent } from 'src/app/modals/create-todo/create-todo.component';[m
+[32m+[m[32mimport { ShareListComponent } from 'src/app/modals/share-list/share-list.component';[m
+ [m
+ @NgModule({[m
+   imports: [[m
+[36m@@ -17,6 +18,6 @@[m [mimport { CreateTodoComponent } from 'src/app/modals/create-todo/create-todo.comp[m
+     IonicModule,[m
+     ListDetailsPageRoutingModule[m
+   ],[m
+[31m-  declarations: [ListDetailsPage, CreateTodoComponent][m
+[32m+[m[32m  declarations: [ListDetailsPage, CreateTodoComponent, ShareListComponent][m
+ })[m
+ export class ListDetailsPageModule {}[m
+[1mdiff --git a/src/app/pages/shared-with-me/shared-with-me.page.html b/src/app/pages/shared-with-me/shared-with-me.page.html[m
+[1mindex 3436340..8d00ca4 100644[m
+[1m--- a/src/app/pages/shared-with-me/shared-with-me.page.html[m
+[1m+++ b/src/app/pages/shared-with-me/shared-with-me.page.html[m
+[36m@@ -11,7 +11,7 @@[m
+       <ion-item-sliding *ngFor="let list of sharedRead">[m
+         <ion-item [routerLink]="['/list-details/' + list.id ]" routerLinkActive="active">[m
+           <ion-label>{{ list.name }}</ion-label>[m
+[31m-          <ion-badge color="default">Read only</ion-badge>[m
+[32m+[m[32m          <ion-badge color="primary">Read only</ion-badge>[m
+         </ion-item>[m
+       </ion-item-sliding>[m
+     </ion-list>[m
+[1mdiff --git a/src/app/pages/todo-details/todo-details.page.html b/src/app/pages/todo-details/todo-details.page.html[m
+[1mindex a5b5674..1775bda 100644[m
+[1m--- a/src/app/pages/todo-details/todo-details.page.html[m
+[1m+++ b/src/app/pages/todo-details/todo-details.page.html[m
+[36m@@ -10,7 +10,7 @@[m
+       <ion-input>{{ todo?.name }}</ion-input>[m
+     </ion-item>[m
+     <ion-item>[m
+[31m-      <ion-textarea rows="20" cols="20" *ngIf="todo" [(ngModel)] = "todo.description"></ion-textarea>[m
+[32m+[m[32m      <ion-textarea rows="10" cols="20" *ngIf="todo" [(ngModel)] = "todo.description"></ion-textarea>[m
+     </ion-item>[m
+   </ion-list>[m
+   <ion-button color="primary" (click)="update(todo, listId)">Primary</ion-button>[m
+[1mdiff --git a/src/app/services/list.service.ts b/src/app/services/list.service.ts[m
+[1mindex 8057389..f40a35c 100644[m
+[1m--- a/src/app/services/list.service.ts[m
+[1m+++ b/src/app/services/list.service.ts[m
+[36m@@ -116,7 +116,6 @@[m [mexport class ListService {[m
+ [m
+   async shareList(listId: string, arg1: boolean, email: string) {[m
+     const listRef = this.af.collection('lists').doc(listId);[m
+[31m-    console.log(email);[m
+     if(arg1){[m
+       await listRef.update({[m
+         canRead: firebase.firestore.FieldValue.arrayRemove(email),[m

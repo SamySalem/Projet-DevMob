@@ -11,7 +11,7 @@
       <ion-item-sliding *ngFor="let list of sharedRead">
         <ion-item [routerLink]="['/list-details/' + list.id ]" routerLinkActive="active">
           <ion-label>{{ list.name }}</ion-label>
-          <ion-badge color="default">Read only</ion-badge>
+          <ion-badge color="primary">Read only</ion-badge>
         </ion-item>
       </ion-item-sliding>
     </ion-list>

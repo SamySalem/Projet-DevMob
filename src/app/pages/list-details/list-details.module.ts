@@ -8,6 +8,7 @@ import { ListDetailsPageRoutingModule } from './list-details-routing.module';
 
 import { ListDetailsPage } from './list-details.page';
 import { CreateTodoComponent } from 'src/app/modals/create-todo/create-todo.component';
+import { ShareListComponent } from 'src/app/modals/share-list/share-list.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { CreateTodoComponent } from 'src/app/modals/create-todo/create-todo.comp
     IonicModule,
     ListDetailsPageRoutingModule
   ],
-  declarations: [ListDetailsPage, CreateTodoComponent]
+  declarations: [ListDetailsPage, CreateTodoComponent, ShareListComponent]
 })
 export class ListDetailsPageModule {}
