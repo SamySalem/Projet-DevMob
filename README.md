@@ -1,6 +1,7 @@
 # Projet-DevMob
 ## Description
-Une application pour gestion des todo lists.  
+Une application pour gestion des todo lists.
+Faite en utilisant Ionic et une base de données Firebase.
 Cette application ne nécessite aucune autorisation spéciale pour s'exécuter.  
 L'app est simple et intuitive, avec un style minimal et une interface très rapide et légère.  
 Profitez!
