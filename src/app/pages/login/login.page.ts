@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import 'firebase/auth';
 import { AuthService } from 'src/app/services/auth.service';
-import * as firebase from 'firebase';
 
 @Component({
   selector: 'todo-list-app-login',
@@ -18,7 +16,7 @@ export class LoginPage {
 
   constructor( private formBuilder: FormBuilder,
     private toastController: ToastController, private route: Router,
-    private auth: AuthService) {
+    public auth: AuthService) {
     this.withEmail = false;
     this.login = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -45,6 +43,19 @@ export class LoginPage {
   
         await toast.present();
       }
+    }
+  }
+  async googleLog() {
+    try {
+      await this.auth.GoogleAuth();
+      this.route.navigate(['home']);
+    } catch (e) {
+      const toast = await this.toastController.create({
+        color: 'danger',
+        duration: 2000,
+        message: e.message
+      });
+      await toast.present();
     }
   }
 }

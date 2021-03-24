@@ -39,7 +39,7 @@ export class RegisterPage {
           this.route.navigate(['login']);
       } catch (e) {
         const toast = await this.toastController.create({
-          color: 'light',
+          color: 'danger',
           duration: 2000,
           message: e.message
         });
