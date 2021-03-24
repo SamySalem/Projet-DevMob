@@ -10,7 +10,7 @@ import { Todo } from '../models/todo';
   providedIn: 'root'
 })
 export class ListService {
-
+  private todo: Todo;
   private lists: List[];
   private listsQuery: AngularFirestoreCollection<List>;
   private myLists: AngularFirestoreCollection<List>;
@@ -112,6 +112,18 @@ export class ListService {
   }).catch((error) => {
       console.error("Error removing document: ", error);
   });
+  }
+  
+  isDone(todo: Todo, listId: string){
+    this.listsQuery.doc(listId).collection('todos').doc(todo.id).update({
+      isDone: !todo.isDone,
+    })
+    .then(() => {
+      console.log("Document successfully written!");
+    })
+    .catch((error) => {
+      console.error("Error writing document: ", error);
+    });
   }
 
   async shareList(listId: string, arg1: boolean, email: string) {

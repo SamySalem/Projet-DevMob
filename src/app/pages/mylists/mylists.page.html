@@ -1,13 +1,13 @@
 <ion-content>
     <ion-list-header class="ion-margin-top">My lists</ion-list-header>
     <ion-list>
-        <ion-reorder-group disabled="false">
+        <ion-reorder-group (ionItemReorder)="reorderItems($event)" disabled="false">
             <!-- Sliding item with text options on both sides -->
             <ion-item-sliding *ngFor="let list of lists">
                 <ion-item [routerLink]="['/list-details/' + list.id ]" routerLinkActive="active">
                     <ion-label>{{ list.name }}</ion-label>
-                    
-            <ion-reorder slot="end"></ion-reorder>
+
+                    <ion-reorder slot="end"></ion-reorder>
                 </ion-item>
 
                 <ion-item-options side="end">

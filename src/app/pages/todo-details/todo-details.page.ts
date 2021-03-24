@@ -19,7 +19,6 @@ export class TodoDetailsPage implements OnInit {
       this.todoId = params['todoId'];
       this.listId = params['listId'];
       this.todoService.getOne(this.todoId, this.listId).then(res => {
-        console.log(res.name);
         this.todo = new Todo(res.name, res.description);
         this.todo.id = this.todoId;
       });

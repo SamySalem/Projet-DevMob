@@ -17,18 +17,27 @@ export class MylistsPage implements OnInit {
     this.lists = [];
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.listService.getAll(1).subscribe(res => this.lists = res);
   }
 
-  async openCreateModal(){
+  async openCreateModal() {
     const modal = await this.modalController.create({
       component: CreateListComponent,
     });
     return await modal.present();
   }
 
-  delete(listId: String){
+  delete(listId: String) {
     this.listService.delete(listId);
+  }
+
+  reorderItems(ev) {
+    const itemMove = this.lists.splice(ev.detail.from, 1)[0];
+    this.lists.splice(ev.detail.to, 0, itemMove);
+    ev.detail.complete();
+    // for (let i = 0; i < this.lists.length; i++) {
+    //   this.listService.create(new List(this.lists[i].name));
+    // }
   }
 }

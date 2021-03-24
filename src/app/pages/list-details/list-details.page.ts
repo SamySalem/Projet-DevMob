@@ -6,6 +6,7 @@ import { List } from 'src/app/models/list';
 import { ActivatedRoute } from '@angular/router';
 import { ShareListComponent } from 'src/app/modals/share-list/share-list.component';
 import { SharePersonsListComponent } from 'src/app/modals/share-persons-list/share-persons-list.component';
+import { TodoService } from 'src/app/services/todo.service';
 
 @Component({
   selector: 'app-list-details',
@@ -16,7 +17,8 @@ export class ListDetailsPage implements OnInit {
   private list: List;
   private listId: string;
 
-  constructor(private listService: ListService, private modalController: ModalController, private route: ActivatedRoute) { }
+  constructor(private listService: ListService, private todoService: TodoService,
+     private modalController: ModalController, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.listId = this.route.snapshot.paramMap.get('listId')
@@ -55,6 +57,10 @@ export class ListDetailsPage implements OnInit {
 
   delete(todo){
     this.listService.deleteTodo(todo, this.listId);
+  }
+
+  isdone(todo){
+    this.listService.isDone(todo, this.listId);
   }
 
 }
