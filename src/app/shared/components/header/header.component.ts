@@ -46,8 +46,6 @@ export class HeaderComponent implements OnInit {
             this.title = list && list.name;
           });
           break;
-        default:
-          console.log(`Unknown url ${url}.`);
       }
     })
   }

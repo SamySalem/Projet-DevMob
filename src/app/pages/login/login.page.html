@@ -3,7 +3,7 @@
     <ion-list-header class="ion-margin-top">Login</ion-list-header>
     <ion-button color="dark" expand="block" shape="round" fill="outline" large (click)="withEmail = !withEmail"
       class="ion-margin-horizontal">
-      <ion-icon slot="end" name="mail"></ion-icon>
+      <ion-icon slot="start" name="mail"></ion-icon>
       With email
     </ion-button>
   </section>
@@ -27,7 +27,7 @@
         </div>
         <ion-button color="primary" expand="block" shape="round" fill="outline" type="submit" large
           [disabled]="login.invalid" class="ion-margin-horizontal ion-margin-bottom">
-          <ion-icon slot="end" name="home"></ion-icon>
+          <ion-icon slot="start" name="home"></ion-icon>
           Login
         </ion-button>
       </form>
@@ -39,8 +39,8 @@
     </section>
   </div>
   <section>
-    <ion-button color="dark" expand="block" shape="round" fill="outline" large class="ion-margin-horizontal ion-margin-top">
-      <ion-icon slot="end" name="logo-google"></ion-icon>
+    <ion-button color="primary" expand="block" shape="round" fill="outline" large class="ion-margin-horizontal ion-margin-top">
+      <ion-icon slot="start" name="logo-google"></ion-icon>
       With google account
     </ion-button>
   </section>
@@ -49,7 +49,7 @@
     <ion-list-header>No account yet?</ion-list-header>
     <ion-button color="dark" expand="block" shape="round" fill="outline" type="submit" large
       [routerLink]="['/register']" class="ion-margin-horizontal">
-      <ion-icon slot="end" name="pencil-sharp"></ion-icon>
+      <ion-icon slot="start" name="pencil-sharp"></ion-icon>
       Register
     </ion-button>
   </section>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Subject, BehaviorSubject } from 'rxjs';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,10 @@ export class AuthService {
       
       await cred.user.sendEmailVerification();
       return cred.user;
+  }
+
+  resetPassword(email: string) {
+    const cred = this.afAuth.sendPasswordResetEmail(email);
+    return cred;
   }
 }
